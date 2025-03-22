@@ -1,4 +1,4 @@
- import './App.css'
+import './App.css'
 import AppRouter from './routes/AppRouter'
 import Modal from './components/UI/Modal/Modal'
 
