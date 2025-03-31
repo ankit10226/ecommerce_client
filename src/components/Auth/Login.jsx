@@ -4,9 +4,9 @@ import Button from '../UI/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import useAuthValidation from '../../hooks/Auth/useAuthValidation';
 import { useDispatch } from 'react-redux';
-import { hideModal, showModal } from '../../redux/slices/ModalSlice'; 
-import axios from 'axios';
-import { setUser } from '../../redux/slices/AuthSlice';
+import { hideModal, showModal } from '../../redux/slices/ModalSlice';  
+import { checkUserSession, setUser } from '../../redux/slices/AuthSlice';
+import api from '../../utils/api/api';
 
 const initialValue = { 
   email: '',
@@ -51,17 +51,19 @@ const Login = () => {
     },false);
     if(hasError) return; 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/user-login`,formData);
+      const response = await api.post(
+        "user-login",
+        formData,
+      );
       if(response.status == 200){
         dispatch(showModal({type:'success',message:response.data?.message}));
-        dispatch(setUser({user:response.data.user,token:response.data.token}))
+        dispatch(checkUserSession());
         setTimeout(() => {
           dispatch(hideModal());
           navigate("/dashboard");
         }, 2000);
       };
-    } catch (error) {
-      console.log(error.response?.data?.message || error.message);
+    } catch (error) { 
       dispatch(showModal({type:'error',message:error.response?.data?.message || error.message}))
     }
   };
