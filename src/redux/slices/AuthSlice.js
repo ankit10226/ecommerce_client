@@ -1,12 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-
-const persistedUser = JSON.parse(localStorage.getItem('user'));
-const persistedToken = localStorage.getItem('token');
+import api from '../../utils/api/api';
 
 const initialState = {
-  user:persistedUser || null,
-  token:persistedToken || null,
-  isLoggedIn:!!persistedToken
+  user:null, 
+  isLoggedIn:false,
+  isCheckingSession: true,
 }
 
 export const authSlice = createSlice({
@@ -14,24 +12,31 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setUser:(state,action)=>{
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
-
-      localStorage.setItem('user',JSON.stringify(action.payload.user));
-      localStorage.setItem('token',action.payload.token);
+      state.user = action.payload; 
+      state.isLoggedIn = true; 
+      state.isCheckingSession = false;
     },
     logoutUser:(state)=>{
-      state.user = null;
-      state.token = null;
-      state.isLoggedIn = false;
-
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
+      state.user = null; 
+      state.isLoggedIn = false; 
+      state.isCheckingSession = false;
+    },
+    setCheckingSession: (state, action) => {
+      state.isCheckingSession = action.payload;
     }
   },
 })
  
-export const { setUser,logoutUser } = authSlice.actions
+export const { setUser,logoutUser,setCheckingSession } = authSlice.actions
+
+export const checkUserSession = () => async (dispatch) => {
+  dispatch(setCheckingSession(true));
+  try {
+    const response = await api.get("/verify-user");  
+    dispatch(setUser(response.data.user));
+  } catch (error) {
+    dispatch(logoutUser());
+  }
+};
 
 export default authSlice.reducer
