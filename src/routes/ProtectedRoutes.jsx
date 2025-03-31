@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 const ProtectedRoutes = (props) => {
   const navigate = useNavigate();
-  const { isLoggedIn } = useSelector((state)=>state.auth);
+  const { isLoggedIn,isCheckingSession } = useSelector((state)=>state.auth);
 
   useEffect(() => {
-     if(!isLoggedIn){
+     if(!isCheckingSession && !isLoggedIn){
       navigate('/');
      }
-  }, [isLoggedIn,navigate])
+  }, [isLoggedIn,isCheckingSession,navigate])
   
-  if(!isLoggedIn) return null;
+  if(isCheckingSession) return <div>Loading...</div>;
 
   return props.children;
 }
