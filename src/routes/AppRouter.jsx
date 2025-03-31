@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     element:<ProtectedRoutes><Dashboard /></ProtectedRoutes>
   },{
     path:'/*',
-    element:<NotFound />
+    element:<ProtectedRoutes><NotFound /></ProtectedRoutes>
   }
 ]);
 
