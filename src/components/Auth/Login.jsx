@@ -3,9 +3,9 @@ import Input from '../UI/Input/Input';
 import Button from '../UI/Button/Button';
 import { useNavigate } from 'react-router-dom';
 import useAuthValidation from '../../hooks/Auth/useAuthValidation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { hideModal, showModal } from '../../redux/slices/ModalSlice';  
-import { checkUserSession, setUser } from '../../redux/slices/AuthSlice';
+import { setUser } from '../../redux/slices/AuthSlice';
 import api from '../../utils/api/api';
 
 const initialValue = { 
@@ -55,13 +55,12 @@ const Login = () => {
         "user-login",
         formData,
       );
-      if(response.status == 200){
-        dispatch(showModal({type:'success',message:response.data?.message}));
-        dispatch(checkUserSession());
-        setTimeout(() => {
-          dispatch(hideModal());
-          navigate("/dashboard");
-        }, 2000);
+      if(response.status == 200){ 
+        const loginUser = response.data?.user;
+        dispatch(setUser(loginUser)); 
+        let dashboardPath = loginUser?.role === "user" ? "/user/dashboard" : "/admin/dashboard";
+        navigate(dashboardPath,{ replace: true }); 
+        dispatch(showModal({type:'success',message:response.data?.message})); 
       };
     } catch (error) { 
       dispatch(showModal({type:'error',message:error.response?.data?.message || error.message}))
