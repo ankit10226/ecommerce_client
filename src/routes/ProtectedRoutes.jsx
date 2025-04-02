@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
+import Loading from '../components/UI/Loading/Loading';
 
 const ProtectedRoutes = (props) => {
   const navigate = useNavigate();
@@ -8,13 +9,13 @@ const ProtectedRoutes = (props) => {
 
   useEffect(() => {
      if(!isCheckingSession && !isLoggedIn){
-      navigate('/');
+      navigate('/login', { replace: true });
      }
   }, [isLoggedIn,isCheckingSession,navigate])
   
-  if(isCheckingSession) return <div>Loading...</div>;
+  if(isCheckingSession) return <Loading/>;
 
-  return props.children;
+  return isLoggedIn ? props.children : <Auth />;
 }
 
 export default ProtectedRoutes
