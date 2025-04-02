@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { hideModal, showModal } from '../../redux/slices/ModalSlice';
 import useAuthValidation from '../../hooks/Auth/useAuthValidation';
+import api from '../../utils/api/api';
 
 const initialValue = {
   name: '',
@@ -49,7 +50,10 @@ const Register = () => {
     }, false);
     if (hasError) return ; 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/user-register`, formData);   
+      const response = await api.post(
+        "/user-register",
+        formData
+      );   
       if(response.status == 200){
         dispatch(showModal({type:"success",message:"Registration Successful."}));
         setTimeout(() => {
