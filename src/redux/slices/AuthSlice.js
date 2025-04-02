@@ -36,13 +36,16 @@ export const checkUserSession = () => async (dispatch) => {
     dispatch(setUser(response.data.user));
   } catch (error) {
     dispatch(logoutUser());
+  } finally {
+    dispatch(setCheckingSession(false)); 
   }
 };
+
 
 export const destroyUserSession = () => async (dispatch) =>{
  try {
     await api.post("/logout");
-    dispatch(logoutUser(initialState));
+    dispatch(logoutUser());
  } catch (error) {
   dispatch(logoutUser());
  }
