@@ -17,7 +17,7 @@ const NotFound = () => {
       <p className="text-xl mb-8">
         The page you are looking for does not exist.
       </p>
-      <Link to={user?.role === 'user' ? '/user/dashboard' : '/admin/dashboard'}>
+      <Link to={user?.role === 'user' ? '/shop/dashboard' : '/admin/dashboard'}>
         <Button className="bg-red-400 text-white">Go To Dashboard</Button>
       </Link>
     </div>
