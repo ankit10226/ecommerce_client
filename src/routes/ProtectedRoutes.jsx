@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import Loading from '../components/UI/Loading/Loading';
+import Auth from '../pages/Auth/Auth';
 
 const ProtectedRoutes = (props) => {
   const navigate = useNavigate();
