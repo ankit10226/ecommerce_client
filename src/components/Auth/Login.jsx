@@ -58,7 +58,7 @@ const Login = () => {
       if(response.status == 200){ 
         const loginUser = response.data?.user;
         dispatch(setUser(loginUser)); 
-        let dashboardPath = loginUser?.role === "user" ? "/user/dashboard" : "/admin/dashboard";
+        let dashboardPath = loginUser?.role === "user" ? "/shop/dashboard" : "/admin/dashboard";
         navigate(dashboardPath,{ replace: true }); 
         dispatch(showModal({type:'success',message:response.data?.message})); 
       };
