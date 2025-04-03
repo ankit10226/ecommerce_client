@@ -2,13 +2,18 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import AdminDashboard from '../pages/Admin/Dashboard/AdminDashboard';
 import { Suspense } from 'react';
 import Loading from '../components/UI/Loading/Loading';
+import NotFound from '../pages/NotFound/NotFound';
 
 const AdminRouter = () => {
   const router = createBrowserRouter([
     {
-      path: '/dashboard',
+      path: '/admin/dashboard',
       element: <AdminDashboard />,
     },
+    {
+      path:'*',
+      element:<NotFound />
+    }
   ]);
 
   return (
