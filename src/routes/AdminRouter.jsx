@@ -3,12 +3,19 @@ import AdminDashboard from '../pages/Admin/Dashboard/AdminDashboard';
 import { Suspense } from 'react';
 import Loading from '../components/UI/Loading/Loading';
 import NotFound from '../pages/NotFound/NotFound';
+import Dashboard from '../components/Admin/Dashboard/Dashboard';
+import Products from '../components/Admin/Products/Products';
 
 const AdminRouter = () => {
   const router = createBrowserRouter([
     {
-      path: '/admin/dashboard',
+      path: '/admin/',
       element: <AdminDashboard />,
+      children:[
+        {index:true,element:<Dashboard />},
+        {path:'dashboard',element:<Dashboard />},
+        {path:'products',element:<Products />},
+      ]
     },
     {
       path:'*',
