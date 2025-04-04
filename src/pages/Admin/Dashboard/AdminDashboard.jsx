@@ -2,28 +2,24 @@ import React from 'react';
 import Button from '../../../components/UI/Button/Button';
 import { useDispatch } from 'react-redux';
 import { destroyUserSession } from '../../../redux/slices/AuthSlice';
-import { useNavigate } from 'react-router-dom';
-import { showModal } from '../../../redux/slices/ModalSlice';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { showModal } from '../../../redux/slices/ModalSlice'; 
+import Sidebar from '../../../components/Admin/Common/Sidebar';
+import Header from '../../../components/Admin/Common/Header';
 
 const AdminDashboard = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    dispatch(destroyUserSession());
-    navigate('/', { replace: true });
-    dispatch(showModal({ type: 'success', message: 'Logout Successfully.' }));
-  };
+  const navigate = useNavigate(); 
   return (
-    <>
-      <div>AdminDashboard</div>
-      <Button
-        type="button"
-        className="bg-red-400 text-white"
-        onClick={handleLogout}
-      >
-        Logout
-      </Button>
-    </>
+    <div className='h-screen w-full flex'> 
+      <Sidebar /> 
+      <div className='w-4/5 h-full'>
+        <Header />
+        <div className='h-fit w-full'>
+          <Outlet />
+        </div>
+      </div>
+    </div>
   );
 };
 
