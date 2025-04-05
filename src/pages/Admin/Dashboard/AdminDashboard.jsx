@@ -13,7 +13,7 @@ const AdminDashboard = () => {
   return (
     <div className='h-screen w-full flex'> 
       <Sidebar /> 
-      <div className='w-4/5 h-full'>
+      <div className='w-full lg:w-4/5 md:w-full sm:w-full h-full'>
         <Header />
         <div className='h-fit w-full'>
           <Outlet />
