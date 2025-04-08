@@ -1,14 +1,28 @@
-import React from 'react'
-import Button from '../../UI/Button/Button'
+import React from 'react';
+import Button from '../../UI/Button/Button';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleProductModal } from '../../../redux/slices/ProductSlice';
+import AddProductModal from './AddProductModal';
 const Products = () => {
+  const dispatch = useDispatch();
   return (
-    <div className='h-fit'>
-      <div className='flex justify-between items-center p-2'>
-        <h1 className='font-bold text-2xl text-gray-800'>Products</h1>
-        <Button className="bg-amber-400 text-white">Add Product</Button>
+    <>
+      <AddProductModal />
+      <div className="h-fit">
+        <div className="flex justify-between items-center p-2">
+          <h1 className="font-bold text-2xl text-gray-700 underline">
+            Products
+          </h1>
+          <Button
+            className="bg-gray-900 text-white"
+            onClick={() => dispatch(toggleProductModal())}
+          >
+            Add New Product
+          </Button>
+        </div>
       </div>
-    </div>
-  )
-}
+    </>
+  );
+};
 
-export default Products
+export default Products;

@@ -69,7 +69,7 @@ const Login = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="bg-white w-4/7 p-4 rounded-lg">
-        <p className="font-bold text-3xl text-red-400 text-center mb-4">
+        <p className="font-bold text-3xl text-gray-900 text-center mb-4">
           Login
         </p>
         <form onSubmit={handleFormSubmit}>
@@ -94,13 +94,13 @@ const Login = () => {
           />
           { error.password && <p className='text-red-400 font-light text-sm'>{errorMessage.password}</p>}
           <div className="text-center mt-2 mb-4">
-            <Button type="submit" className="bg-red-400 text-white w-full">
+            <Button type="submit" className="bg-gray-900 text-white w-full">
               Submit
             </Button>
           </div>
           <p className="text-right font-semibpld">
             <span
-              className="text-red-400 text-sm cursor-pointer"
+              className="text-gray-900 text-sm cursor-pointer"
               onClick={() => navigate('/register')}
             >
               New User?

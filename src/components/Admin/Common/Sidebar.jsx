@@ -3,7 +3,7 @@ import Logo from './Logo';
 import sidebarList from '../../../utils/sidebarList/sidebarList';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { showSidebar } from '../../../redux/slices/SidebarSlice';
+import { toggleSidebar } from '../../../redux/slices/SidebarSlice';
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -15,14 +15,14 @@ const Sidebar = () => {
         <div
           className="fixed inset-0 z-20 lg:hidden"
           style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-          onClick={() => dispatch(showSidebar())}
+          onClick={() => dispatch(toggleSidebar())}
         />
       )}
 
       <div
-        className={`fixed top-0 left-0 h-svh w-3/4 max-w-xs bg-gray-800 text-white shadow-xl z-30 transform transition-transform duration-300 ease-in-out 
+        className={`fixed top-0 left-0 h-svh w-3/4 max-w-xs bg-gray-900 text-white shadow-xl z-30 transform transition-transform duration-300 ease-in-out 
           ${isVisible ? 'translate-x-0' : '-translate-x-full'} 
-          lg:static lg:translate-x-0 lg:block lg:w-1/5 lg:shadow-xl lg:bg-white lg:text-gray-800`}
+          lg:static lg:translate-x-0 lg:block lg:w-1/5 lg:shadow-xl lg:bg-white lg:text-gray-900`}
       >
         <Logo />
         <ul className="py-4 px-6">
@@ -30,7 +30,7 @@ const Sidebar = () => {
             <Link
               to={list.navigate}
               key={list.id}
-              onClick={() => dispatch(showSidebar())}
+              onClick={() => dispatch(toggleSidebar())}
             >
               <li className="w-fit flex items-center justify-start py-2 cursor-pointer transition duration-200 ease-in-out hover:scale-110">
                 {list.logo}

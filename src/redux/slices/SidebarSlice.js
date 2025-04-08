@@ -7,12 +7,12 @@ export const SidbarSlice = createSlice({
   name:'sidebar',
   initialState,
   reducers:{
-    showSidebar:(state)=>{
+    toggleSidebar:(state)=>{
       state.isVisible = !state.isVisible;
     }
   }
 });
 
-export const { showSidebar } = SidbarSlice.actions;
+export const { toggleSidebar } = SidbarSlice.actions;
 
 export default SidbarSlice.reducer
