@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AdminRouter from './routes/AdminRouter';
 import AuthRouter from './routes/AuthRouter';
 import ShopRouter from './routes/ShopRouter';
+import AjaxLoader from './components/UI/AjaxLoader/AjaxLoader';
 
 function App() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ function App() {
   const { user } = useSelector((state) => state.auth);    
   return (
     <>
+      <AjaxLoader />
       <Modal />
       {!user ? (
         <AuthRouter />

@@ -3,6 +3,7 @@ import Button from '../../UI/Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleProductModal } from '../../../redux/slices/ProductSlice';
 import AddProductModal from './AddProductModal';
+import ProductDetails from './ProductDetails';
 const Products = () => {
   const dispatch = useDispatch();
   return (
@@ -21,6 +22,7 @@ const Products = () => {
           </Button>
         </div>
       </div>
+      <ProductDetails />
     </>
   );
 };

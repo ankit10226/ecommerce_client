@@ -9,6 +9,7 @@ import api from '../../../utils/api/api';
 import TextArea from '../../UI/TextArea/TextArea';
 import categoryList from '../../../utils/categoryList/categoryList';
 import Select from '../../UI/Select/Select';
+import { toggleAjaxLoader } from '../../../redux/slices/AjaxLoaderSlice';
 
 const initialFormData = {
   title:'',
@@ -54,7 +55,8 @@ const AddProductModal = () => {
   
     const formData = new FormData();
     formData.append("file", file);
-  
+    
+    dispatch(toggleAjaxLoader());
     try {
       const response = await api.post(
         "/admin/upload/image",
@@ -81,6 +83,8 @@ const AddProductModal = () => {
     } catch (err) {
       console.error("Image upload error:", err);
       dispatch(showModal({ type: "error", message: "Image upload failed!" }));
+    }finally{
+      dispatch(toggleAjaxLoader());
     }
   };
   
