@@ -10,11 +10,11 @@ const Products = () => {
       <AddProductModal />
       <div className="h-fit">
         <div className="flex justify-between items-center p-2">
-          <h1 className="font-bold text-2xl text-gray-700 underline">
+          <h1 className="font-bold text-2xl text-gray-800 underline">
             Products
           </h1>
           <Button
-            className="bg-gray-900 text-white"
+            className="bg-teal-500 text-white"
             onClick={() => dispatch(toggleProductModal())}
           >
             Add New Product

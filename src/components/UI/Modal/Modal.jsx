@@ -2,8 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createPortal } from 'react-dom';
 import { hideModal } from '../../../redux/slices/ModalSlice';
-import Button from '../Button/Button';
-import { X } from 'lucide-react';
+import Button from '../Button/Button'; 
 
 const Modal = ({}) => {
   const dispatch = useDispatch();
@@ -18,7 +17,7 @@ const Modal = ({}) => {
         <h2 className={`text-xl font-bold mb-2 ${type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
           {type === 'success' ? 'Success' : 'Error'}
         </h2>
-        <p className='py-4 font-semibold text-gray-900'>{message}</p>
+        <p className='py-4 font-semibold text-teal-900'>{message}</p>
         <Button type="type" className={`mt-4 px-4 py-2 text-white ${type === 'success' ? 'bg-green-400' : 'bg-red-400'}`} onClick={() => dispatch(hideModal())}>
           Close
         </Button> 

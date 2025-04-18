@@ -20,9 +20,9 @@ const Sidebar = () => {
       )}
 
       <div
-        className={`fixed top-0 left-0 h-svh w-3/4 max-w-xs bg-gray-900 text-white shadow-xl z-30 transform transition-transform duration-300 ease-in-out 
+        className={`fixed top-0 left-0 h-svh w-3/4 max-w-xs bg-gray-800 text-white shadow-xl z-30 transform transition-transform duration-300 ease-in-out 
           ${isVisible ? 'translate-x-0' : '-translate-x-full'} 
-          lg:static lg:translate-x-0 lg:block lg:w-1/5 lg:shadow-xl lg:bg-white lg:text-gray-900`}
+          lg:static lg:translate-x-0 lg:block lg:w-1/5 lg:shadow-xl lg:bg-white lg:text-gray-800`}
       >
         <Logo />
         <ul className="py-4 px-6">

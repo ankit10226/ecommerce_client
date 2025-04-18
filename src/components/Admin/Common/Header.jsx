@@ -18,12 +18,12 @@ const Header = () => {
  
   return (
     <header className='h-16 w-full shadow-lg flex items-center justify-between lg:justify-end px-4'> 
-      <Button type="button" className="bg-gray-900 text-white lg:hidden md:block" onClick={()=>dispatch(toggleSidebar())}>
+      <Button type="button" className="bg-gray-800 text-white lg:hidden md:block" onClick={()=>dispatch(toggleSidebar())}>
         <AlignJustify />
       </Button>
       <Button
         type="button"
-        className="bg-gray-900 text-white"
+        className="bg-gray-800 text-white"
         onClick={handleLogout}
       >
        <LogOut className='inline'/>Logout
