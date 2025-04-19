@@ -77,7 +77,7 @@ const AddProductModal = () => {
             ...prev,
             imageUrlError: false
           }));
-          dispatch(showModal({ type: "success", message: "Image uploaded successfully!" }));
+          // dispatch(showModal({ type: "success", message: "Image uploaded successfully!" }));
         }
       }
     } catch (err) {
@@ -135,7 +135,7 @@ const AddProductModal = () => {
   if(!isProductModalVisible) return null;
   return createPortal(
     <div className="fixed inset-0 flex items-center justify-center z-40" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)'}}>
-      <div className="bg-white p-4 w-1/4 rounded-lg shadow-lg max-h-[90vh] overflow-y-auto">
+      <div className="bg-white p-4 lg:w-1/4 md:w-1/2 rounded-lg shadow-lg max-h-[90vh] overflow-y-auto">
         <form onSubmit={handleFormSubmit}>
         <Input
           type="file"

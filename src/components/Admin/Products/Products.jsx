@@ -7,11 +7,11 @@ import ProductDetails from './ProductDetails';
 const Products = () => {
   const dispatch = useDispatch();
   return (
-    <>
+    <div className="w-full h-[calc(100vh-64px)] overflow-y-auto"> 
       <AddProductModal />
       <div className="h-fit">
         <div className="flex justify-between items-center p-2">
-          <h1 className="font-bold text-2xl text-gray-800 underline">
+          <h1 className="font-bold text-2xl text-teal-900 underline">
             Products
           </h1>
           <Button
@@ -23,7 +23,7 @@ const Products = () => {
         </div>
       </div>
       <ProductDetails />
-    </>
+      </div>
   );
 };
 
