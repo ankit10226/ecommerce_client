@@ -16,7 +16,7 @@ const Products = () => {
           </h1>
           <Button
             className="bg-teal-500 text-white"
-            onClick={() => dispatch(toggleProductModal())}
+            onClick={() => dispatch(toggleProductModal({type:'addModal'}))}
           >
             Add New Product
           </Button>

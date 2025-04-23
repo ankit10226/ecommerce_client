@@ -1,34 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../utils/api/api';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleAjaxLoader } from '../../../redux/slices/AjaxLoaderSlice';
+import Button from '../../UI/Button/Button';
+import { fetchProducts, toggleProductModal } from '../../../redux/slices/ProductSlice';
+import { showModal } from '../../../redux/slices/ModalSlice';
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
+  const {products} = useSelector((state)=>state.product);
 
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    const fetchProducts = async () => {
+  const handleEditForm = (e) =>{
+    const productId = e.target.id; 
+    dispatch(toggleProductModal({type:'editModal',id:productId}));
+  };
+
+  const handleDeleteProduct = async (e) =>{
+    const productId = e.target.id;
+    const res = confirm("Are you sure you want to delete this product?");
+    if (res) {
+      dispatch(toggleAjaxLoader());
       try {
-        dispatch(toggleAjaxLoader());
-        const response = await api.get('/admin/fetch/product');
+        const response = await api.delete(`/admin/delete/product/${productId}`); 
         if (response.status === 200) {
-          setProducts(response.data.product); 
+          dispatch(showModal({type:'success',message:response.data?.message})); 
+          dispatch(fetchProducts()); 
         }
       } catch (error) {
-        dispatch(showModal({ type: "error", message: error.response?.data?.message || error.message }));
-      } finally {
+        dispatch(showModal({type:'error',message:error.response?.data?.message || error.message}))
+      }finally{
         dispatch(toggleAjaxLoader());
       }
-    };
+    }
+  }
 
-    fetchProducts();
-  }, [dispatch]);
+  useEffect(()=>{
+    dispatch(fetchProducts());
+  },[dispatch]);
+  // console.log(products);
   return (
     <> 
       <div className="w-full p-2 grid lg:grid-cols-2 gap-4 md:grid-cols-1">
         {products.map((value) => (
-          <div className="flex h-50 shadow-lg rounded-lg border-1 border-gray-300 hover:border-gray-400 hover:transition ease-linear text-teal-900" key={value._id}>
+          <div key={value._id} className='shadow-lg rounded-lg border-1 border-gray-300 hover:border-gray-400 hover:transition ease-linear text-teal-900'>
+          <div className="flex h-50" >
             <div className="w-1/3 overflow-hidden rounded-lg flex justify-center items-center">
               <img
                 src={value.image}
@@ -55,6 +70,11 @@ const ProductDetails = () => {
               </div>
             </div>
           </div>
+          <div className='flex justify-start items-center p-2 border-t-1 border-teal-200'>
+            <Button type="button" className="bg-teal-500 text-white mx-2" id={value._id} onClick={handleEditForm}>Edit</Button>
+            <Button type="button" className="bg-teal-900 text-white" id={value._id} onClick={handleDeleteProduct}>Delete</Button>
+          </div>
+        </div>
         ))}
       </div>
     </>
