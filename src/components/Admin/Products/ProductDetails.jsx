@@ -37,7 +37,7 @@ const ProductDetails = () => {
   useEffect(()=>{
     dispatch(fetchProducts());
   },[dispatch]);
-  // console.log(products);
+  console.log(products);
   return (
     <> 
       <div className="w-full p-2 grid lg:grid-cols-2 gap-4 md:grid-cols-1">
@@ -52,6 +52,18 @@ const ProductDetails = () => {
               />
             </div>
             <div className="w-2/3 overflow-y-scroll p-2">
+              <div className='flex'>
+                <h1 className='font-bold w-1/3'>Category</h1>
+                <p className='pl-2 w-2/3 font-semibold text-teal-700'>{value.category[0].toUpperCase()+value.category.slice(1)}</p>
+              </div>
+              <div className='flex'>
+                <h1 className='font-bold w-1/3'>Sub Category</h1>
+                <p className='pl-2 w-2/3 font-semibold text-teal-700'>{value.subCategory[0].toUpperCase()+value.subCategory.slice(1)}</p>
+              </div>
+              <div className='flex'>
+                <h1 className='font-bold w-1/3'>Brand</h1>
+                <p className='pl-2 w-2/3 font-semibold text-teal-700'>{value.brand[0].toUpperCase()+value.brand.slice(1)}</p>
+              </div>
               <div className='flex'>
                 <h1 className='font-bold w-1/3'>Title</h1>
                 <p className='pl-2 w-2/3 font-semibold text-teal-700'>{value.title}</p>

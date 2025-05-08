@@ -1,30 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { showModal } from '../../../redux/slices/ModalSlice';
 import { toggleAjaxLoader } from '../../../redux/slices/AjaxLoaderSlice';
 import api from '../../../utils/api/api';
+import { fetchDashboards } from '../../../redux/slices/DashboardSlice';
 
 const DashboardDetails = () => {
 
   const dispatch = useDispatch();
-
-  const [dashboards, setDashboards] = useState([]);
+  const {dashboards} = useSelector((state)=>state.dashboard);
   useEffect(() => {
-    const fetchDashboards = async () => {
-      try {
-        dispatch(toggleAjaxLoader());
-        const response = await api.get('/admin/fetch/dashboard');
-        if (response.status === 200) {
-          setDashboards(response.data.dashboard);  
-        }
-      } catch (error) { 
-        dispatch(showModal({ type: "error", message: error.response?.data?.message || error.message }));
-      } finally {
-        dispatch(toggleAjaxLoader());
-      }
-    };
-
-    fetchDashboards();
+    dispatch(fetchDashboards());
   }, [dispatch]);
   return (
     <div className='w-full p-2'>

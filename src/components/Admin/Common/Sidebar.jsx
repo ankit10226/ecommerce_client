@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from './Logo';
-import sidebarList from '../../../utils/sidebarList/sidebarList';
+import sidebarList from '../../../utils/Admin/sidebarList';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../../../redux/slices/SidebarSlice';

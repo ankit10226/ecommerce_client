@@ -1,36 +1,36 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 
-import Loading from '../components/UI/Loading/Loading';
-const ShopDashboard = lazy(() =>
-  import('../pages/Shop/Dashboard/ShopDashboard')
-);
-const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
-const ProtectedRoutes = lazy(() => import('./ProtectedRoutes'));
+import Loading from '../components/UI/Loading/Loading'; 
+import NotFound from '../pages/NotFound/NotFound';
+import ShopDashboard from '../pages/Shop/Dashboard/ShopDashboard';
+import Dashboard from '../components/Shop/Dashboard/Dashboard';
+import Men from '../components/Shop/Men/Men';
+import Women from '../components/Shop/Women/Women';
+import Kids from '../components/Shop/Kids/Kids';
 
 const ShopRouter = () => {
-  const router = createBrowserRouter([
+  const router = createBrowserRouter([ 
     {
-      path: '/shop/dashboard',
-      element: (
-        <ProtectedRoutes>
-          <ShopDashboard />
-        </ProtectedRoutes>
-      ),
+      path: '/shop/',
+      element: <ShopDashboard />,
+      children:[
+        {index:true,element:<Dashboard />},
+        {path:'dashboard',element:<Dashboard />},
+        {path:'men',element:<Men />},
+        {path:'women',element:<Women />},
+        {path:'kids',element:<Kids />},
+      ]
     },
     {
-      path: '*',
-      element: (
-        <ProtectedRoutes>
-          <NotFound />
-        </ProtectedRoutes>
-      ),
-    },
+      path:'*',
+      element:<NotFound />
+    }
   ]);
 
   return (
     <Suspense fallback={<Loading />}>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}></RouterProvider>
     </Suspense>
   );
 };

@@ -11,9 +11,12 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () =>{
-    dispatch(destroyUserSession());
-    navigate('/',{ replace: true });
-    dispatch(showModal({ type: 'success', message: 'Logout Successfully.' }));
+    let res = confirm('Are you sure want to logout!');
+    if(res){
+      dispatch(destroyUserSession());
+      navigate('/',{ replace: true });
+      dispatch(showModal({ type: 'success', message: 'Logout Successfully.' }));
+    }
   }
  
   return (

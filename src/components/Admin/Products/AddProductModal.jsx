@@ -7,7 +7,7 @@ import Input from '../../UI/Input/Input';
 import { showModal } from '../../../redux/slices/ModalSlice';
 import api from '../../../utils/api/api';
 import TextArea from '../../UI/TextArea/TextArea';
-import categoryList from '../../../utils/categoryList/categoryList';
+import {categoryList,subCategoryList,brandList} from '../../../utils/Admin/dropDownList';
 import Select from '../../UI/Select/Select';
 import { toggleAjaxLoader } from '../../../redux/slices/AjaxLoaderSlice';
 
@@ -17,6 +17,8 @@ const initialFormData = {
   quantity:'',
   description:'',
   category:'',
+  subCategory:'',
+  brand:'',
 }
 
 const initialError = { 
@@ -25,6 +27,8 @@ const initialError = {
   quantity:false,
   description:false,
   category:false,
+  subCategory:false,
+  brand:false,
   imageUrlError:false
 };
 
@@ -147,6 +151,8 @@ const AddProductModal = () => {
           quantity: editProductDetails.quantity || '',
           description: editProductDetails.description || '',
           category: editProductDetails.category || '', 
+          subCategory: editProductDetails.subCategory || '', 
+          brand: editProductDetails.brand || '', 
           image: editProductDetails.image || '',
         }); 
         setImageUrl(editProductDetails.image || '');
@@ -185,12 +191,30 @@ const AddProductModal = () => {
         <Select
           name="category"
           id="category"
-          placeholder="Select category"
+          placeholder="Select Category"
           options={categoryList}
           value={formData.category}
           onChange={handleInputChange}
         />
         { error.category && <p className='text-red-400 font-light text-sm'>{`This field is required!`}</p>}
+        <Select
+          name="subCategory"
+          id="subCategory"
+          placeholder="Select Sub Category"
+          options={subCategoryList}
+          value={formData.subCategory}
+          onChange={handleInputChange}
+        />
+        { error.subCategory && <p className='text-red-400 font-light text-sm'>{`This field is required!`}</p>}
+        <Select
+          name="brand"
+          id="brand"
+          placeholder="Select Brand"
+          options={brandList}
+          value={formData.brand}
+          onChange={handleInputChange}
+        />
+        { error.brand && <p className='text-red-400 font-light text-sm'>{`This field is required!`}</p>}
         <Input
             type="text"
             name="title"

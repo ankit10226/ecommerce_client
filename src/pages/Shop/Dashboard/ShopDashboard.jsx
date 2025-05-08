@@ -2,8 +2,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../../components/UI/Button/Button';
 import { destroyUserSession } from '../../../redux/slices/AuthSlice';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { showModal } from '../../../redux/slices/ModalSlice';
+import Header from '../../../components/Shop/Common/Header';
 
 const ShopDashboard = () => {
   const dispatch = useDispatch();
@@ -16,14 +17,8 @@ const ShopDashboard = () => {
   };
   return (
     <>
-      <div>ShopDashboard</div>
-      <Button
-        type="button"
-        className="bg-red-400 text-white"
-        onClick={handleLogout}
-      >
-        Logout
-      </Button>
+      <Header />
+      <Outlet />      
     </>
   );
 };
