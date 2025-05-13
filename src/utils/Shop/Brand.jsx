@@ -5,25 +5,25 @@ const brandList = [
     id:'adidas',
     name:'Adidas',
     logo: <AlignJustify />,
-    navigate: '/shop/products?brand=adidas'
+    navigate: '/shop/products&category=all?brand=adidas'
   },
   {
     id:'nike',
     name:'Nike',
     logo: <Check />,
-    navigate: '/shop/products?brand=nike'
+    navigate: '/shop/products&category=all?brand=nike'
   },
   {
     id:'puma',
     name:'Puma',
     logo: <ParkingSquare />,
-    navigate: '/shop/products?brand=puma'
+    navigate: '/shop/products&category=all?brand=puma'
   },
   {
     id:'reebok',
     name:'Reebok',
     logo: <Gitlab />,
-    navigate: '/shop/products?brand=reebok'
+    navigate: '/shop/products&category=all?brand=reebok'
   }
 ]
 
