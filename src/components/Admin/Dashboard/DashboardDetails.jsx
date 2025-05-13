@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { showModal } from '../../../redux/slices/ModalSlice';
-import { toggleAjaxLoader } from '../../../redux/slices/AjaxLoaderSlice';
-import api from '../../../utils/api/api';
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'; 
 import { fetchDashboards } from '../../../redux/slices/DashboardSlice';
 
 const DashboardDetails = () => {

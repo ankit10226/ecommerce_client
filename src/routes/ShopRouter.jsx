@@ -4,10 +4,8 @@ import { lazy, Suspense } from 'react';
 import Loading from '../components/UI/Loading/Loading'; 
 import NotFound from '../pages/NotFound/NotFound';
 import ShopDashboard from '../pages/Shop/Dashboard/ShopDashboard';
-import Dashboard from '../components/Shop/Dashboard/Dashboard';
-import Men from '../components/Shop/Men/Men';
-import Women from '../components/Shop/Women/Women';
-import Kids from '../components/Shop/Kids/Kids';
+import Dashboard from '../components/Shop/Dashboard/Dashboard'; 
+import Products from '../components/Shop/Products/Products';
 
 const ShopRouter = () => {
   const router = createBrowserRouter([ 
@@ -17,9 +15,7 @@ const ShopRouter = () => {
       children:[
         {index:true,element:<Dashboard />},
         {path:'dashboard',element:<Dashboard />},
-        {path:'men',element:<Men />},
-        {path:'women',element:<Women />},
-        {path:'kids',element:<Kids />},
+        {path:'products',element:<Products />},
       ]
     },
     {

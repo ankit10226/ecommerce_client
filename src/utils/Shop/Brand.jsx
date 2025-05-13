@@ -4,22 +4,26 @@ const brandList = [
   {
     id:'adidas',
     name:'Adidas',
-    logo: <AlignJustify />
+    logo: <AlignJustify />,
+    navigate: '/shop/products?brand=adidas'
   },
   {
     id:'nike',
     name:'Nike',
-    logo: <Check />
+    logo: <Check />,
+    navigate: '/shop/products?brand=nike'
   },
   {
     id:'puma',
     name:'Puma',
-    logo: <ParkingSquare />
+    logo: <ParkingSquare />,
+    navigate: '/shop/products?brand=puma'
   },
   {
     id:'reebok',
     name:'Reebok',
-    logo: <Gitlab />
+    logo: <Gitlab />,
+    navigate: '/shop/products?brand=reebok'
   }
 ]
 
