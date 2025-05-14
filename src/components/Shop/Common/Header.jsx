@@ -1,45 +1,78 @@
-import React from 'react'
-import Button from '../../UI/Button/Button'
-import { AlignJustify, LogOut } from 'lucide-react'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import Logo from '../../Shop/Common/Logo'
-import { destroyUserSession } from '../../../redux/slices/AuthSlice'
-import CategoryList from './CategoryList'
-import Cart from '../Cart/Cart'
+import React, { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { User } from "lucide-react";
+import Logo from "../../Shop/Common/Logo";
+import CategoryList from "./CategoryList";
+import Cart from "../Cart/Cart";
+import { destroyUserSession } from "../../../redux/slices/AuthSlice"; 
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleLogout = () =>{
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef();
+
+  const handleLogout = () => {
     let res = confirm('Are you sure want to logout!');
     if(res){
       dispatch(destroyUserSession());
-      navigate('/',{ replace: true });
-      dispatch(showModal({ type: 'success', message: 'Logout Successfully.' }));
+      navigate('/',{ replace: true }); 
     }
-  }
+  };
+
+  const handleProfileClick = () => {
+    navigate("/shop/profile");
+    setShowDropdown(false);
+  };
+ 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
-    <header className='h-16 w-full shadow-lg flex items-center justify-between px-4'>
+    <header className="h-16 w-full shadow-lg flex items-center justify-between px-4 relative">
       <div>
-        <Logo />  
+        <Logo />
       </div>
       <div>
         <CategoryList />
       </div>
-      <div className='flex justify-between items-center'>
+      <div className="flex justify-between items-center relative" ref={dropdownRef}>
         <Cart />
-        <Button
-          type="button"
-          className="bg-teal-900 text-white ml-8"
-          style={{borderRadius:50}}
-          onClick={handleLogout}
-          >
-        <LogOut className='inline'/>
-        </Button> 
+        <span
+          className="bg-teal-900 text-white p-2 rounded-3xl ml-4 flex justify-center items-center cursor-pointer relative"
+          onClick={() => setShowDropdown((prev) => !prev)}
+        >
+          <User className="inline" />
+        </span>
+
+        {showDropdown && (
+          <div className="absolute right-0 top-14 bg-white border border-gray-400 shadow-md rounded-md w-32 z-10">
+            <button
+              className="w-full text-left px-4 py-2 rounded-md text-tea-900 hover:bg-gray-100"
+              onClick={handleProfileClick}
+            >
+              Profile
+            </button>
+            <hr className="text-gray-200 mx-2"/>
+            <button
+              className="w-full text-left px-4 py-2 rounded-md text-red-600 hover:bg-gray-100"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </div>
+        )}
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

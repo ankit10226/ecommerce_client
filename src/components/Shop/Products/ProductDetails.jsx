@@ -30,10 +30,10 @@ const ProductDetails = () => {
   }, [searchParams.toString()]);
 
   return (
-    <div className="w-4/5 overflow-y-auto my-2 mx-4">
+    <div className="w-5/6 overflow-y-auto my-2 mx-4">
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-2xl text-teal-900 my-3">Products</h1>
-        <span className="text-sm font-semibold text-teal-900">Total Products : {products.length}</span>
+        <span className="text-sm font-semibold text-teal-900 mr-2">Total Products : {products.length}</span>
       </div>
       <hr className="mb-4 text-gray-300"/>
       <div className="w-full p-2 grid gap-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
