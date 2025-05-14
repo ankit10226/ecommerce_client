@@ -6,8 +6,8 @@ const SidebarFilterList = ({ title, list, selectedList = [], onChange }) => {
   };
 
   return (
-    <>
-      <h1 className="font-bold text-md mb-2 underline">{title}</h1>
+    <div className="pl-6">
+      <h1 className="font-bold text-md mb-2">{title}</h1>
       <ul className="mb-4">
         {list.map((value) => (
           <li key={value.id} className="flex items-center gap-2 mb-2">
@@ -24,7 +24,7 @@ const SidebarFilterList = ({ title, list, selectedList = [], onChange }) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 

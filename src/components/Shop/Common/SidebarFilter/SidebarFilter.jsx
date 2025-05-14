@@ -39,16 +39,17 @@ const SidebarFilter = () => {
   };
 
   return (
-    <div className={`h-full w-1/6 shadow-2xl text-teal-900 pl-6 py-4`}>
-      <h1 className="font-bold text-lg mb-4 underline">Filter</h1>
+    <div className={`h-full w-1/6 shadow-2xl text-teal-900 py-4`}>
+      <h1 className="font-bold text-lg mb-4 pl-6">Filters</h1>
+      <hr className="mb-4 text-gray-300 mx-4"/>
       <SidebarFilterList
-        title="By Category"
+        title="Category"
         list={subCategoryList}
         selectedList={selectedSubCategories}
         onChange={handleSubCategoryChange}
       />
       <SidebarFilterList
-        title="By Brand"
+        title="Brand"
         list={brandList}
         selectedList={selectedBrands}
         onChange={handleBrandChange}
