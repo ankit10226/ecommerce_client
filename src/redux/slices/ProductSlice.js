@@ -30,7 +30,7 @@ export const { toggleProductModal,setProduct } = ProductSlice.actions;
 export const fetchProducts = () => async (dispatch) => {
   try { 
     dispatch(toggleAjaxLoader());
-    const response = await api.get('/admin/fetch/product'); 
+    const response = await api.get('/admin/fetch/products'); 
     dispatch(setProduct(response.data.product));  
   } catch (error) {
     dispatch(showModal({ type: "error", message: error.response?.data?.message || error.message }));
@@ -38,5 +38,26 @@ export const fetchProducts = () => async (dispatch) => {
     dispatch(toggleAjaxLoader());
   }
 };
+
+export const fetchFilteredProducts = (filters) => async (dispatch) => {
+  try {
+    dispatch(toggleAjaxLoader());
+ 
+    const params = new URLSearchParams();
+
+    if (filters.category) params.append("category", filters.category);
+    filters.subCategories?.forEach(sub => params.append("subCategory", sub));
+    filters.brands?.forEach(brand => params.append("brand", brand));
+
+    const response = await api.get(`/shop/fetch/products?${params.toString()}`);
+    
+    dispatch(setProduct(response.data.product));
+  } catch (error) {
+    dispatch(showModal({ type: "error", message: error.response?.data?.message || error.message }));
+  } finally {
+    dispatch(toggleAjaxLoader());
+  }
+};
+
 
 export default ProductSlice.reducer
