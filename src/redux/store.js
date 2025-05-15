@@ -3,6 +3,7 @@ import authReducer from "./slices/AuthSlice";
 import modalReducer from "./slices/ModalSlice";
 import sidebarReducer from "./slices//SidebarSlice"
 import productReducer from "./slices/ProductSlice"
+import addressReducer from "./slices/AddressSlice"
 import dashboardReducer from "./slices/DashboardSlice"
 import ajaxLoaderReducer from "./slices/AjaxLoaderSlice"
 
@@ -12,6 +13,7 @@ export const store = configureStore({
     modal:modalReducer,
     sidebar:sidebarReducer,
     product:productReducer,
+    address:addressReducer,
     dashboard:dashboardReducer,
     ajaxLoader:ajaxLoaderReducer
   },

@@ -8,6 +8,8 @@ import Dashboard from "../components/Shop/Dashboard/Dashboard";
 import Products from "../components/Shop/Products/Products";
 import Profile from "../components/Shop/Profile/Profile";
 import ShoppingCart from "../components/Shop/ShoppingCart/ShoppingCart";
+import Orders from "../components/Shop/Profile/Orders";
+import Address from "../components/Shop/Profile/Address";
 
 const ShopRouter = () => {
   const router = createBrowserRouter([
@@ -19,7 +21,14 @@ const ShopRouter = () => {
         { path: "dashboard", element: <Dashboard /> },
         { path: "products", element: <Products /> },
         { path: "shoppingCart", element: <ShoppingCart /> },
-        { path: "profile", element: <Profile /> },
+        { path: "profile/",
+          element: <Profile />,
+          children: [
+            {index:true,element:<Orders />},
+            {path:"orders",element:<Orders />},
+            {path:"address",element:<Address />}
+          ] 
+        },
       ],
     },
     {

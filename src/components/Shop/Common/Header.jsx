@@ -22,7 +22,7 @@ const Header = () => {
   };
 
   const handleProfileClick = () => {
-    navigate("/shop/profile");
+    navigate("/shop/profile/orders");
     setShowDropdown(false);
   };
  
