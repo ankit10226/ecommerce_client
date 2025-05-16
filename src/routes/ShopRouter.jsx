@@ -9,7 +9,7 @@ import Products from "../components/Shop/Products/Products";
 import Profile from "../components/Shop/Profile/Profile";
 import ShoppingCart from "../components/Shop/ShoppingCart/ShoppingCart";
 import Orders from "../components/Shop/Profile/Orders";
-import Address from "../components/Shop/Profile/Address";
+import Address from "../components/Shop/Profile/Address/Address";
 
 const ShopRouter = () => {
   const router = createBrowserRouter([

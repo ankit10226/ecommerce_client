@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toggleAjaxLoader } from "./AjaxLoaderSlice";
 import api from "../../utils/api/api";
 import { showModal } from "./ModalSlice";
+import { useSelector } from "react-redux";
 
 const initialState = {
   isAddressModalVisible: false,
@@ -9,6 +10,7 @@ const initialState = {
   editModalId:null,
   address:[]
 };
+
 export const AddressSlice = createSlice({
   name: 'address',
   initialState,
@@ -27,10 +29,10 @@ export const AddressSlice = createSlice({
 
 export const { toggleAddressModal,setAddress } = AddressSlice.actions;
 
-export const fetchAddress = () => async (dispatch) => {
+export const fetchAddress = (userId) => async (dispatch) => {  
   try { 
     dispatch(toggleAjaxLoader());
-    const response = await api.get('/shop/fetch/address'); 
+    const response = await api.get(`/shop/fetch/address/${userId}`); 
     dispatch(setAddress(response.data.address));  
   } catch (error) {
     dispatch(showModal({ type: "error", message: error.response?.data?.message || error.message }));

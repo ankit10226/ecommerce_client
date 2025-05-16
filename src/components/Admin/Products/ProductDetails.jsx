@@ -36,8 +36,8 @@ const ProductDetails = () => {
 
   useEffect(()=>{
     dispatch(fetchProducts());
-  },[dispatch]);
-  console.log(products);
+  },[dispatch]); 
+  
   return (
     <> 
       <div className="w-full p-2 grid lg:grid-cols-2 gap-4 md:grid-cols-1">
