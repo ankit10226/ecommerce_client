@@ -39,7 +39,7 @@ const SidebarFilter = () => {
   };
 
   return (
-    <div className={`h-full w-1/6 shadow-2xl text-teal-900 py-4`}>
+    <div className={`h-full lg:w-1/6 md:w-1/5 sm:w-1/4 w-1/3 shadow-2xl text-teal-900 py-4`}>
       <h1 className="font-bold text-lg mb-4 pl-6">Filters</h1>
       <hr className="mb-4 text-gray-300 mx-4"/>
       <SidebarFilterList

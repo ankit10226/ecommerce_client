@@ -1,24 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { fetchFilteredProducts } from "../../../redux/slices/ProductSlice";
 import Button from "../../UI/Button/Button"
+import { setCartItem } from "../../../redux/slices/CartSlice";
+import { showModal } from "../../../redux/slices/ModalSlice";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.product);
-  console.log(products);
-
-  const [searchParams] = useSearchParams();
+  const { cartItems } = useSelector((state) => state.cart);  
+  
+  const [searchParams] = useSearchParams(); 
 
   const category = searchParams.get("category");
   const subCategories = searchParams.getAll("subCategory");
   const brands = searchParams.getAll("brand");
 
   const showProductDetail = (e) => {
-    const id = e.currentTarget.getAttribute('data-id');
-    console.log(id);
+    const id = e.target.id; 
   };
+
+  const handleAddToCart = (e) =>{
+    const id = e.target.id;
+    const product = products.find((item)=> item._id === id);
+    
+    let itemPresent = cartItems.find((item)=> item._id === id);
+    if(itemPresent){ 
+      dispatch(showModal({type:'alert',message:'Item is already added to cart.'}));
+    }else{ 
+      const payload = [
+        ...cartItems,
+        product
+      ]
+      console.log(payload);
+      dispatch(setCartItem(payload));
+    }
+  }
 
   useEffect(() => {
     const filters = {
@@ -30,7 +48,7 @@ const ProductDetails = () => {
   }, [searchParams.toString()]);
 
   return (
-    <div className="w-5/6 overflow-y-auto my-2 mx-4">
+    <div className="lg:w-5/6 md:w-4/5 sm:w-3/4 w-2/3 overflow-y-auto my-2 mx-4">
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-2xl text-teal-900 my-3">Products</h1>
         <span className="text-sm font-semibold text-teal-900 mr-2">Total Products : {products.length}</span>
@@ -47,7 +65,7 @@ const ProductDetails = () => {
                 <img
                   src={value.image}
                   alt={`${value.title} image`}
-                  data-id={value.id}
+                  id={value._id}
                   className="w-full h-auto transition-transform duration-300 ease-linear hover:scale-110"
                   onClick={showProductDetail}
                 />
@@ -67,7 +85,7 @@ const ProductDetails = () => {
                 <p className="font-semibold text-teal-700">
                    &#8377;{value.price}
                 </p>
-                <Button  type="button" className="bg-teal-900 text-white w-full my-2">
+                <Button type="button" className="bg-teal-900 text-white w-full my-2" id={value._id} onClick={handleAddToCart}>
                   Add To Cart
                 </Button> 
               </div>

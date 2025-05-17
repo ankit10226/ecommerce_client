@@ -14,8 +14,7 @@ const Header = () => {
     let res = confirm('Are you sure want to logout!');
     if(res){
       dispatch(destroyUserSession());
-      navigate('/',{ replace: true });
-      dispatch(showModal({ type: 'success', message: 'Logout Successfully.' }));
+      navigate('/',{ replace: true }); 
     }
   }
  

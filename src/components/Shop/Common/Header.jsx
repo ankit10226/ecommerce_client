@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { User } from "lucide-react";
+import { AlignJustify, User } from "lucide-react";
 import Logo from "../../Shop/Common/Logo";
 import CategoryList from "./CategoryList";
 import Cart from "../Cart/Cart";
 import { destroyUserSession } from "../../../redux/slices/AuthSlice"; 
+import Button from "../../UI/Button/Button";
+import { toggleSidebar } from "../../../redux/slices/SidebarSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -38,12 +40,19 @@ const Header = () => {
 
   return (
     <header className="h-16 w-full shadow-lg flex items-center justify-between px-4 relative">
-      <div>
-        <Logo />
+      <div className="flex justify-center items-center">
+        <Button type="button" className="bg-teal-900 text-white lg:hidden md:hidden sm:block mr-4" onClick={()=>dispatch(toggleSidebar())}>
+          <AlignJustify />
+        </Button>
+        <span className="hidden lg:block md:block sm:hidden">
+          <Logo />
+        </span>
       </div>
-      <div>
+
+      <div className="hidden lg:block md:block sm:hidden">
         <CategoryList />
       </div>
+      
       <div className="flex justify-between items-center relative" ref={dropdownRef}>
         <Cart />
         <span

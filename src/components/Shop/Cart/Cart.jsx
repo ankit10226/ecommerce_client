@@ -2,9 +2,14 @@ import { ShoppingCart } from "lucide-react";
 import React from "react";
 import Button from "../../UI/Button/Button";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Cart = () => {
-  const navigate = useNavigate();
+  const { cartItems } = useSelector((state) => state.cart); 
+  console.log('cartItem',cartItems)
+
+  const navigate = useNavigate(); 
+
   const handleShoppingCart = () => {
     navigate("/shop/shoppingCart");
   };
@@ -15,7 +20,7 @@ const Cart = () => {
       onClick={handleShoppingCart}
     >
       <ShoppingCart />
-      <span className="ml-4 px-2 bg-white rounded-lg text-teal-800">0</span>
+      <span className="ml-4 px-2 bg-white rounded-lg text-teal-800">{cartItems.length}</span>
     </Button>
   );
 };

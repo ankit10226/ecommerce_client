@@ -6,6 +6,7 @@ import productReducer from "./slices/ProductSlice"
 import addressReducer from "./slices/AddressSlice"
 import dashboardReducer from "./slices/DashboardSlice"
 import ajaxLoaderReducer from "./slices/AjaxLoaderSlice"
+import cartReducer from "./slices/CartSlice"
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     product:productReducer,
     address:addressReducer,
     dashboard:dashboardReducer,
-    ajaxLoader:ajaxLoaderReducer
+    ajaxLoader:ajaxLoaderReducer,
+    cart:cartReducer
   },
 })
