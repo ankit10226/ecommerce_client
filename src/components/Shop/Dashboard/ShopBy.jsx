@@ -10,7 +10,7 @@ const ShopBy = (props) => {
       <div className="grid grid-cols-4 gap-4">
         {props.list.map((list) => (
           <Link to={list.navigate} key={list.id}>
-            <div className="border border-gray-300 rounded-lg flex flex-col justify-center items-center py-4 mx-8 cursor-pointer hover:border-gray-500">
+            <div className="border border-gray-300 rounded-lg flex flex-col justify-center items-center py-4 lg:mx-8 md:mx-4 sm:mx-2 mx-0.5 cursor-pointer hover:border-gray-500">
               <span className="py-4">{list.logo}</span>
               <p className="font-bold">{list.name}</p>
             </div>

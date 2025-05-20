@@ -29,11 +29,11 @@ const ProductDetails = () => {
     if(itemPresent){ 
       dispatch(showModal({type:'alert',message:'Item is already added to cart.'}));
     }else{ 
+      const newItem = { ...product, cartQty: 1 };
       const payload = [
         ...cartItems,
-        product
-      ]
-      console.log(payload);
+        newItem
+      ] 
       dispatch(setCartItem(payload));
     }
   }

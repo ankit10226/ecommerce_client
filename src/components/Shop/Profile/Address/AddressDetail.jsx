@@ -9,7 +9,7 @@ import api from "../../../../utils/api/api";
 const AddressDetail = () => {
   const dispatch = useDispatch();
   const { address } = useSelector((state) => state.address);
-  const { user } = useSelector((state)=>state.auth);
+  const { user } = useSelector((state)=>state.auth); 
 
   const handleEditForm = (e) => {
     const addressId = e.target.id;
@@ -27,7 +27,7 @@ const AddressDetail = () => {
           dispatch(
             showModal({ type: "success", message: response.data?.message })
           );
-          dispatch(fetchAddress(user.userId));
+          dispatch(fetchAddress(user.id));
         }
       } catch (error) {
         dispatch(
@@ -43,8 +43,10 @@ const AddressDetail = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchAddress(user.userId));
-  }, [dispatch]);
+    if (user?.userId) {
+      dispatch(fetchAddress(user.userId));
+    }
+  }, [dispatch, user?.userId]);
 
   if (address.length === 0) {
     return (

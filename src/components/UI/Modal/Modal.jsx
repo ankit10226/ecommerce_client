@@ -24,7 +24,7 @@ const Modal = ({}) => {
   if(!isVisible) return null;
 
   return createPortal(
-    <div className="fixed inset-0 flex items-center justify-center z-40" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
+    <div className="fixed inset-0 flex items-center justify-center z-80" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
       <div className="bg-white p-4 w-86 rounded-lg shadow-lg">
         {/* <span className='float-right py-2' onClick={() => dispatch(hideModal())}><X /></span> */}
         

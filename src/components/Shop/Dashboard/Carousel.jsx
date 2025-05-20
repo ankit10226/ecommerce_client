@@ -23,6 +23,11 @@ const Carousel = () => {
       prev === dashboards.length - 1 ? 0 : prev + 1
     );
   };
+
+  if(!dashboards.length > 0){
+    return null;
+  }
+
   return (
     <div className='relative w-full h-80 flex items-center justify-center overflow-hidden shadow-lg bg-white'>
     {dashboards.length > 0 && (

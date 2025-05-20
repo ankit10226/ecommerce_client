@@ -6,8 +6,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import ShopDashboard from "../pages/Shop/Dashboard/ShopDashboard";
 import Dashboard from "../components/Shop/Dashboard/Dashboard";
 import Products from "../components/Shop/Products/Products";
-import Profile from "../components/Shop/Profile/Profile";
-import ShoppingCart from "../components/Shop/ShoppingCart/ShoppingCart";
+import Profile from "../components/Shop/Profile/Profile"; 
 import Orders from "../components/Shop/Profile/Orders";
 import Address from "../components/Shop/Profile/Address/Address";
 
@@ -19,8 +18,7 @@ const ShopRouter = () => {
       children: [
         { index: true, element: <Dashboard /> },
         { path: "dashboard", element: <Dashboard /> },
-        { path: "products", element: <Products /> },
-        { path: "shoppingCart", element: <ShoppingCart /> },
+        { path: "products", element: <Products /> }, 
         { path: "profile/",
           element: <Profile />,
           children: [
