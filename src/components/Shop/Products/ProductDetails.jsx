@@ -35,6 +35,7 @@ const ProductDetails = () => {
         newItem
       ] 
       dispatch(setCartItem(payload));
+      dispatch(showModal({ type: "success", message: "Item added to cart." }));
     }
   }
 

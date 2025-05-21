@@ -6,8 +6,7 @@ import { toggleShoppingCartModal } from "../../../redux/slices/CartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((state) => state.cart); 
-  console.log('cartItem',cartItems) 
+  const { cartItems } = useSelector((state) => state.cart);  
  
   return (
     <Button
