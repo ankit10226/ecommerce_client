@@ -7,9 +7,7 @@ import { showModal } from "../../../redux/slices/ModalSlice";
 
 const ShoppingCartDetail = () => {
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((state)=>state.cart); 
-
-  const [total,setTotal] = useState(0);
+  const { totalAmount,cartItems } = useSelector((state)=>state.cart);  
 
   const handleQtyClick = (type,id) =>{  
     const item = cartItems.find((item) => item._id === id);
@@ -17,8 +15,7 @@ const ShoppingCartDetail = () => {
     if (type === "add" && item.cartQty === item.quantity) {
       dispatch(showModal({ type: "alert", message: "Cannot add item more than stock." }));
       return;
-    }
-    setTotal((state)=>state+(item.price * item.cartQty))
+    } 
     dispatch(updateCartQty({ id, type }));
   }
    
@@ -58,7 +55,7 @@ const ShoppingCartDetail = () => {
       <hr className="mt-4 mb-2 text-gray-300" />
       <div className="flex justify-between mx-6 mb-4">
         <p className="text-sm font-semibold">Total</p> 
-        <p className="text-sm font-semibold">&#8377;{total}</p> 
+        <p className="text-sm font-semibold">&#8377;{totalAmount}</p> 
       </div>
       <div className="flex justify-end ">
         <Button

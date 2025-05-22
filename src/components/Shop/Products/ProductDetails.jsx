@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { fetchFilteredProducts } from "../../../redux/slices/ProductSlice";
 import Button from "../../UI/Button/Button"
-import { setCartItem } from "../../../redux/slices/CartSlice";
+import { setCartItem, setTotalAmount } from "../../../redux/slices/CartSlice";
 import { showModal } from "../../../redux/slices/ModalSlice";
 
 const ProductDetails = () => {
@@ -35,6 +35,7 @@ const ProductDetails = () => {
         newItem
       ] 
       dispatch(setCartItem(payload));
+      dispatch(setTotalAmount({type:'new',value:product.price}));
       dispatch(showModal({ type: "success", message: "Item added to cart." }));
     }
   }
@@ -67,7 +68,7 @@ const ProductDetails = () => {
                   src={value.image}
                   alt={`${value.title} image`}
                   id={value._id}
-                  className="w-full h-auto transition-transform duration-300 ease-linear hover:scale-110"
+                  className={`w-full h-auto transition-transform duration-300 ease-linear hover:scale-110 ${value.quantity === 0 ? 'grayscale' : ''}`}
                   onClick={showProductDetail}
                 />
               </div>
@@ -86,8 +87,8 @@ const ProductDetails = () => {
                 <p className="font-semibold text-teal-700">
                    &#8377;{value.price}
                 </p>
-                <Button type="button" className="bg-teal-900 text-white w-full my-2" id={value._id} onClick={handleAddToCart}>
-                  Add To Cart
+                <Button type="button" className={`text-white w-full my-2 ${value.quantity === 0 ? 'bg-gray-500' : 'bg-teal-900'}`} id={value._id} onClick={handleAddToCart} disabled={value.quantity === 0}>
+                  {value.quantity === 0 ? "Out of Stock" : "Add To Cart"}
                 </Button> 
               </div>
             </div>

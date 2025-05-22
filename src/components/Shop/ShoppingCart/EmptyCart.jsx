@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { toggleShoppingCartModal } from "../../../redux/slices/CartSlice";
+import { setTotalAmount, toggleShoppingCartModal } from "../../../redux/slices/CartSlice";
 import Button from "../../UI/Button/Button";
 
 const EmptyCart = () => {
   const dispatch = useDispatch();
-
+  useEffect(()=>{
+    dispatch(setTotalAmount({type:'empty',value:0}));
+  },[dispatch]);
   return (
     <>
       <p className="text-center font-semibold text-teal-900 text-xl mb-4">
