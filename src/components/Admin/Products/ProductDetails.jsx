@@ -40,7 +40,7 @@ const ProductDetails = () => {
   
   return (
     <> 
-      <div className="w-full p-2 grid lg:grid-cols-2 gap-4 md:grid-cols-1">
+      <div className="w-full h-[calc(100vh-128px)] overflow-y-auto p-2 grid lg:grid-cols-2 gap-4 md:grid-cols-1">
         {products.map((value) => (
           <div key={value._id} className='shadow-lg rounded-lg border-1 border-gray-300 hover:border-gray-400 hover:transition ease-linear text-teal-900'>
           <div className="flex h-50" >

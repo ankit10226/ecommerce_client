@@ -68,7 +68,7 @@ const Register = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="bg-white w-4/7 p-4 rounded-lg">
-        <p className="font-bold text-3xl text-teal-500 text-center mb-4">
+        <p className="font-bold text-3xl text-teal-600 text-center mb-4">
           Register
         </p>
         <form onSubmit={handleFormSubmit}>
@@ -103,13 +103,13 @@ const Register = () => {
           />
           { error.password && <p className='text-red-400 font-light text-sm'>{errorMessage.password}</p>}
           <div className="text-center mt-2 mb-4">
-            <Button type="submit" className="bg-teal-500 text-white w-full">
+            <Button type="submit" className="bg-teal-600 text-white w-full">
               Submit
             </Button>
           </div>
           <p className="text-right font-semibpld">
             <span
-              className="text-teal-500 text-sm cursor-pointer"
+              className="text-teal-600 text-sm cursor-pointer"
               onClick={() => navigate('/login')}
             >
               Sign In

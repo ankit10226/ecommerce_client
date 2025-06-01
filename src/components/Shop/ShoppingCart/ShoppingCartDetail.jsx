@@ -1,15 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartItem, toggleShoppingCartModal, updateCartQty } from "../../../redux/slices/CartSlice";
+import { clearCart, deleteCartItem, selectCartTotalAmount, toggleShoppingCartModal, updateCartQty } from "../../../redux/slices/CartSlice";
 import Button from "../../UI/Button/Button";
+import Select from "../../UI/Select/Select"
 import { Trash2 } from "lucide-react";
 import { showModal } from "../../../redux/slices/ModalSlice";
+import { useNavigate } from "react-router-dom";
+import { fetchAddress } from "../../../redux/slices/AddressSlice";
+import api from "../../../utils/api/api";
+import { toggleAjaxLoader } from "../../../redux/slices/AjaxLoaderSlice";
 
 const ShoppingCartDetail = () => {
   const dispatch = useDispatch();
-  const { totalAmount,cartItems } = useSelector((state)=>state.cart);  
+  const navigate = useNavigate();
 
-  const handleQtyClick = (type,id) =>{  
+  const { cartItems } = useSelector((state)=>state.cart);  
+  const totalAmount = useSelector(selectCartTotalAmount);
+
+  const { user } = useSelector((state)=>state.auth); 
+  const { address } = useSelector((state) => state.address);  
+
+  const [showOrderTab,setShowOrderTab] = useState(false);
+  const [selectedAddress,setSelectedAddress] = useState("");
+  const [nullAddress,setNullAddress] = useState(false);
+
+  const handleQtyClick = (type,id) =>{ 
     const item = cartItems.find((item) => item._id === id);
 
     if (type === "add" && item.cartQty === item.quantity) {
@@ -19,6 +34,61 @@ const ShoppingCartDetail = () => {
     dispatch(updateCartQty({ id, type }));
   }
    
+  const handleOrderTab = () =>{
+    let addressCount = address.length;
+    if(addressCount === 0){
+      dispatch(showModal({ type: "alert", message: "Add atleast one address to place order." }));
+      return;
+    }
+    setNullAddress(false);
+    setShowOrderTab((state)=>!state);
+  }
+
+  const handleOrderSubmit = async () => {
+    if (!selectedAddress) {
+      setNullAddress(true);
+      return;
+    }
+
+    const payload = {
+      userId: user.userId,
+      addressId: selectedAddress,
+      totalAmount: totalAmount,
+      totalItems: cartItems.reduce((acc, item) => acc + item.cartQty, 0),
+      orderDetails: cartItems.map((item) => ({
+        productId: item._id,
+        quantity: item.cartQty,
+        price: item.price,      
+      }))
+    };
+
+    dispatch(toggleAjaxLoader());
+    try {
+      const response = await api.post("/user/place-order", payload);
+      if (response.status === 200) {
+        dispatch(showModal({ type: "success", message: "Order placed successfully!" }));
+        dispatch(clearCart());
+        dispatch(toggleShoppingCartModal()); 
+        navigate("profile/orders",{ replace: true }); 
+      }
+    } catch (error) { 
+      dispatch(showModal({ type: "error", message: error.response?.data?.message || error.message }));
+    }finally{
+      dispatch(toggleAjaxLoader());
+    }
+  };
+
+  const addressOptions = address.map((addr) => ({
+    key:addr._id,
+    id: addr._id,
+    name: `${addr.address}, ${addr.state}, ${addr.pincode}`,
+  }));
+
+  useEffect(() => {
+    if (user?.userId) {
+      dispatch(fetchAddress(user.userId));
+    }
+  }, [dispatch, user?.userId]);
   return (
     <>
       <div>
@@ -57,18 +127,48 @@ const ShoppingCartDetail = () => {
         <p className="text-sm font-semibold">Total</p> 
         <p className="text-sm font-semibold">&#8377;{totalAmount}</p> 
       </div>
-      <div className="flex justify-end ">
-        <Button
-          type="button"
-          className="bg-red-400 text-white mr-2"
-          onClick={() => dispatch(toggleShoppingCartModal())}
-        >
-          Close
-        </Button>
-        <Button type="button" className="bg-gray-800 text-white">
-          Checkout
-        </Button>
-      </div>
+        {showOrderTab ? (
+          <>
+            <div className="w-full"> 
+              <Select
+                name="address"
+                id="address"
+                placeholder="-- Select Address --"
+                options={addressOptions}
+                value={selectedAddress}
+                onChange={(e) => setSelectedAddress(e.target.value)}
+              />
+              {nullAddress && !selectedAddress && (
+                <p className="text-red-400 text-sm">Please select address</p>
+              )}
+            </div>
+            <div className="flex justify-end ">
+              <Button
+                type="button"
+                className="bg-red-400 text-white mr-2"
+                onClick={handleOrderTab}
+              >
+                Cancel
+              </Button>
+              <Button type="button" className="bg-gray-800 text-white" onClick={handleOrderSubmit}>
+                Order
+              </Button>        
+            </div>
+          </>
+        ) : (
+          <div className="flex justify-end ">
+            <Button
+              type="button"
+              className="bg-red-400 text-white mr-2"
+              onClick={() => dispatch(toggleShoppingCartModal())}
+            >
+              Close
+            </Button>
+            <Button type="button" className="bg-gray-800 text-white" onClick={handleOrderTab}>
+              Checkout
+            </Button>        
+          </div>
+      )}
     </>
   );
 };

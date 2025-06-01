@@ -42,13 +42,15 @@ export const checkUserSession = () => async (dispatch) => {
 };
 
 
-export const destroyUserSession = () => async (dispatch) =>{
+export const destroyUserSession = (navigate) => async (dispatch) =>{
  try {
     await api.post("/logout");
+  } catch (error) {
+    console.log(error);
+  } finally {
     dispatch(logoutUser());
- } catch (error) {
-  dispatch(logoutUser());
- }
+    navigate('/',{ replace: true }); 
+  }
 };
 
 export default authSlice.reducer

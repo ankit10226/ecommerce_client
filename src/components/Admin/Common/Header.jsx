@@ -13,8 +13,7 @@ const Header = () => {
   const handleLogout = () =>{
     let res = confirm('Are you sure want to logout!');
     if(res){
-      dispatch(destroyUserSession());
-      navigate('/',{ replace: true }); 
+      dispatch(destroyUserSession(navigate)); 
     }
   }
  

@@ -16,7 +16,7 @@ const AddressDetail = () => {
     dispatch(toggleAddressModal({ type: "editModal", id: addressId }));
   };
 
-  const handleDeleteProduct = async (e) => {
+  const handleDeleteAddress = async (e) => {
     const addressId = e.target.id;
     const res = confirm("Are you sure you want to delete this address?");
     if (res) {
@@ -27,7 +27,7 @@ const AddressDetail = () => {
           dispatch(
             showModal({ type: "success", message: response.data?.message })
           );
-          dispatch(fetchAddress(user.id));
+          dispatch(fetchAddress(user.userId));
         }
       } catch (error) {
         dispatch(
@@ -83,7 +83,7 @@ const AddressDetail = () => {
             </div>
             <div className="flex justify-start items-center p-2 border-t border-teal-200 mt-auto">
                 <Button type="button" className="bg-teal-500 text-white mx-2" id={value._id} onClick={handleEditForm}>Edit</Button>
-                <Button type="button" className="bg-red-400 text-white" id={value._id} onClick={handleDeleteProduct}>Delete</Button>
+                <Button type="button" className="bg-red-400 text-white" id={value._id} onClick={handleDeleteAddress}>Delete</Button>
             </div>
         </div>
       ))} 

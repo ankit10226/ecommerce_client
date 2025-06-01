@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { toggleAjaxLoader } from '../../../redux/slices/AjaxLoaderSlice';
 import api from '../../../utils/api/api';
 import DashboardDetails from './DashboardDetails';
+import { fetchDashboards } from '../../../redux/slices/DashboardSlice';
 
 const initialFormData = { 
 }
@@ -23,8 +24,7 @@ const Dashboard = () => {
   const [fileName, setFileName] = useState('');
 
   const handleFileSelect = async (e) => {
-    const file = e.target.files[0];
-    console.log(file);
+    const file = e.target.files[0]; 
     if (!file) return;
 
     const formData = new FormData();
@@ -82,6 +82,7 @@ const Dashboard = () => {
       if (response.status === 200) {
         setFileName('');
         dispatch(showModal({type:'success',message:response.data?.message}));
+        dispatch(fetchDashboards());
       }
     } catch (error) {
       dispatch(showModal({type:'error',message:error.response?.data?.message || error.message}))

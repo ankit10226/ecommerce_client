@@ -7,7 +7,7 @@ import ProductDetails from './ProductDetails';
 const Products = () => {
   const dispatch = useDispatch();
   return (
-    <div className="w-full h-[calc(100vh-64px)] overflow-y-auto"> 
+    <div className="w-full"> 
       <AddProductModal />
       <div className="h-fit">
         <div className="flex justify-between items-center p-2">

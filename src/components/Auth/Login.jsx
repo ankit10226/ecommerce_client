@@ -68,8 +68,15 @@ const Login = () => {
   };
   return (
     <div className="flex flex-col justify-center items-center">
+      <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4 rounded text-sm">
+        <p><strong>Admin Login:</strong></p>
+        <p>Email: <span className="font-mono text-gray-800">admin@gmail.com</span></p>
+        <p>Password: <span className="font-mono text-gray-800">123456</span></p>
+        <hr className="my-2" />
+        <p>For user login, please <span className="font-semibold">register</span> new user.</p>
+      </div>
       <div className="bg-white w-4/7 p-4 rounded-lg">
-        <p className="font-bold text-3xl text-teal-500 text-center mb-4">
+        <p className="font-bold text-3xl text-teal-600 text-center mb-4">
           Login
         </p>
         <form onSubmit={handleFormSubmit}>
@@ -94,13 +101,13 @@ const Login = () => {
           />
           { error.password && <p className='text-red-400 font-light text-sm'>{errorMessage.password}</p>}
           <div className="text-center mt-2 mb-4">
-            <Button type="submit" className="bg-teal-500 text-white w-full">
+            <Button type="submit" className="bg-teal-600 text-white w-full">
               Submit
             </Button>
           </div>
           <p className="text-right font-semibpld">
             <span
-              className="text-teal-500 text-sm cursor-pointer"
+              className="text-teal-600 text-sm cursor-pointer"
               onClick={() => navigate('/register')}
             >
               New User?
