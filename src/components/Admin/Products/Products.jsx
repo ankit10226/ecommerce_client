@@ -18,7 +18,7 @@ const Products = () => {
           Add New Product
         </Button>
       </div>
-      <div className="w-full h-[calc(100vh-115px)] overflow-y-hidden">
+      <div className="w-full h-[calc(100vh-115px)] overflow-y-scroll">
         <div className="h-fit"></div>
         <ProductDetails />
       </div>
