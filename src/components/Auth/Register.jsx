@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { hideModal, showModal } from '../../redux/slices/ModalSlice';
 import useAuthValidation from '../../hooks/Auth/useAuthValidation';
 import api from '../../utils/api/api';
+import { toggleAjaxLoader } from '../../redux/slices/AjaxLoaderSlice';
 
 const initialValue = {
   name: '',
@@ -50,6 +51,7 @@ const Register = () => {
     }, false);
     if (hasError) return ; 
     try {
+      dispatch(toggleAjaxLoader());
       const response = await api.post(
         "/user-register",
         formData
@@ -63,6 +65,8 @@ const Register = () => {
       }
     } catch (error) {
       dispatch(showModal({type:"error",message:error.response?.data?.message || error.message}));
+    }finally{
+      dispatch(toggleAjaxLoader());
     }
   };
   return (

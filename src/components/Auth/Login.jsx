@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { hideModal, showModal } from '../../redux/slices/ModalSlice';  
 import { setUser } from '../../redux/slices/AuthSlice';
 import api from '../../utils/api/api';
+import { toggleAjaxLoader } from '../../redux/slices/AjaxLoaderSlice';
 
 const initialValue = { 
   email: '',
@@ -51,6 +52,7 @@ const Login = () => {
     },false);
     if(hasError) return; 
     try {
+      dispatch(toggleAjaxLoader());
       const response = await api.post(
         "user-login",
         formData,
@@ -64,6 +66,8 @@ const Login = () => {
       };
     } catch (error) { 
       dispatch(showModal({type:'error',message:error.response?.data?.message || error.message}))
+    }finally{
+      dispatch(toggleAjaxLoader());
     }
   };
   return (

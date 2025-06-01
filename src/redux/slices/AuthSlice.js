@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import api from '../../utils/api/api';
+import { toggleAjaxLoader } from './AjaxLoaderSlice';
 
 const initialState = {
   user:null, 
@@ -44,12 +45,14 @@ export const checkUserSession = () => async (dispatch) => {
 
 export const destroyUserSession = (navigate) => async (dispatch) =>{
  try {
+    dispatch(toggleAjaxLoader());
     await api.post("/logout");
   } catch (error) {
     console.log(error);
   } finally {
     dispatch(logoutUser());
     navigate('/',{ replace: true }); 
+    dispatch(toggleAjaxLoader());
   }
 };
 
