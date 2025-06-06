@@ -67,7 +67,7 @@ const Orders = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentOrders = order.slice(indexOfFirstItem, indexOfLastItem); 
   const totalPages = Math.ceil(order.length / itemsPerPage);
-
+  // console.log(order[0].createdAt)
   return (
     <>
       <OrderDetails />
@@ -104,15 +104,17 @@ const Orders = () => {
                         onChange={handleStatusChange}
                       />
                   </td>
-                  <td className="border border-gray-300 px-3 py-2">{new Date(ord.created_at).toLocaleDateString()}</td>
+                  <td className="border border-gray-300 px-3 py-2">{new Date(ord.createdAt).toLocaleDateString('en-GB')}</td>
                   <td className="border border-gray-300 px-3 py-2 capitalize">{`${ord.address.address}, ${ord.address.state}, ${ord.address.pincode}`}</td>
                   <td className="border border-gray-300 px-3 py-2">
-                    <Button type="button" className="bg-gray-800 text-white mx-2" id={ord._id} onClick={()=>dispatch(fetchOrderDetail(ord._id))}>
-                      <Eye />
-                    </Button>
-                    <Button type="button" className="bg-red-400 text-white mx-2" id={ord._id} onClick={handleDeleteOrder}>
-                      <Trash2 id={ord._id}/>
-                    </Button>
+                    <div className='flex'>
+                      <Button type="button" className="bg-gray-800 text-white mx-2" id={ord._id} onClick={()=>dispatch(fetchOrderDetail(ord._id))}>
+                        <Eye />
+                      </Button>
+                      <Button type="button" className="bg-red-400 text-white mx-2" id={ord._id} onClick={handleDeleteOrder}>
+                        <Trash2 id={ord._id}/>
+                      </Button>
+                    </div>
                   </td>
                 </tr>
               ))
